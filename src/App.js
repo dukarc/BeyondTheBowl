@@ -1,46 +1,26 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
+import { render } from "react-dom";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import ProjectCard from "./components/ProjectCard";
+import "./style/App.css";
 
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardMedia,
-  CardTitle,
-  CardText
-} from "material-ui/Card";
+import { projects } from "./store.js";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <MuiThemeProvider>
-          <Card>
-            <CardMedia
-              overlay={
-                <CardTitle title="Overlay WOOT" subtitle="Overlay subtitle" />
-              }
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/4/44/Jelly_cc11.jpg"
-                alt=""
-              />
-            </CardMedia>
-            <CardTitle title="Card title" subtitle="Card subtitle" />
-            <CardText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec
-              vulputate interdum sollicitudin. Nunc lacinia auctor quam sed
-              pellentesque. Aliquam dui mauris, mattis quis lacus id,
-              pellentesque lobortis odio.
-            </CardText>
-          </Card>
-        </MuiThemeProvider>
-      </div>
-    );
-  }
-}
-
-export default App;
+export default () => (
+  <div className="App">
+    <MuiThemeProvider>
+      {projects.map(project => {
+        return (
+          <div className="Project-grid">
+            <ProjectCard
+              title={project.title}
+              description={project.descripton}
+              image={project.image}
+              url={project.url}
+            />
+          </div>
+        );
+      })}
+    </MuiThemeProvider>
+  </div>
+);
